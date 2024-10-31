@@ -26,7 +26,7 @@ export function Input({ name, control, placeholder, rules, error, keyboardType }
                             onBlur={onBlur}
                             value={value}
                             onChangeText={onChange}
-                            keyboardType="default" 
+                            keyboardType={keyboardType} 
                         />
                     );
                 }} 

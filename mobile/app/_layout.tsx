@@ -1,18 +1,34 @@
 import { Stack } from "expo-router";
+import { QueryClientProvider, QueryClient  } from '@tanstack/react-query'
+
+
 
 export default function RootLayout() {
+  const queryClient = new QueryClient();
   return (
-    <Stack>
-      <Stack.Screen 
-        name="index"
-        options={{
-          headerShown: false
-        }} />
+    <QueryClientProvider client={queryClient}>
+      <Stack>
         <Stack.Screen 
-        name="step/index"
-        options={{
-          headerShown: false
-        }} />
-    </Stack>
+          name="index"
+          options={{
+            headerShown: false
+          }} />
+          <Stack.Screen 
+          name="step/index"
+          options={{
+            headerShown: false
+          }} />
+          <Stack.Screen 
+          name="create/index"
+          options={{
+            headerShown: false
+          }} />
+          <Stack.Screen 
+          name="nutrition/index"
+          options={{
+            headerShown: false
+          }} />
+      </Stack>
+    </QueryClientProvider>
   );
 }

@@ -1,10 +1,12 @@
-import { View, Text, Image, StyleSheet, Pressable, ScrollView, KeyboardTypeOptions} from 'react-native'
+import { View, Text, StyleSheet, Pressable, ScrollView, KeyboardTypeOptions} from 'react-native'
 import { colors } from '../../constants/colors'
 import { Header } from '../../components/header'
 import { Input } from '../../components/input'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { router } from 'expo-router'
+import { useDataStore } from '../../store/data'
 
 const schema = z.object({
     name: z.string().min(1, {message: "O nome é obrigatório"}),
@@ -18,6 +20,20 @@ export default function Step(){
     const { control, handleSubmit, formState: { errors, isValid } } = useForm<FormData>({
         resolver: zodResolver(schema)
     })
+
+    const setPageOne  = useDataStore(state => state.setPageOne)
+
+    function handleCreate(data: FormData){
+        console.log('Passando dados da page 1')
+        setPageOne({
+            name: data.name,
+            weight: data.weight,
+            age: data.age,
+            height: data.height
+        })
+        router.push('/create')
+    }
+   
     return(
         <View style={styles.container}>
             <Header step='Passo 1' title='Vamos Começar!'/>
@@ -53,7 +69,12 @@ export default function Step(){
                 placeholder='Ex: 25'
                 error={errors.age?.message}
                 keyboardType='numeric'/>
+
+                <Pressable style={styles.button} onPress={handleSubmit(handleCreate)}>
+                    <Text style={styles.buttonText}>Avançar</Text>
+                </Pressable>
             </ScrollView>
+            
         </View>
     )
 }
@@ -72,5 +93,19 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontWeight: 'bold',
         marginBottom: 8
+    },
+    button:{
+        backgroundColor: colors.blue,
+        height: 44,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+
+    },
+    buttonText:{
+        color: colors.white,
+        fontSize: 16,
+        fontWeight: 'bold'
+
     }
 })
