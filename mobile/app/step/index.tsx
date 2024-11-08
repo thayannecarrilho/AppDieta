@@ -49,7 +49,7 @@ export default function Step() {
             error={errors.name?.message}
             keyboardType="default"
           />
-          <Text style={styles.label}>Seu peso atual:</Text>
+          <Text style={styles.label}>Seu peso:</Text>
           <Input
             name="weight"
             control={control}
@@ -57,7 +57,7 @@ export default function Step() {
             error={errors.weight?.message}
             keyboardType="numeric"
           />
-          <Text style={styles.label}>Sua altura atual:</Text>
+          <Text style={styles.label}>Sua altura:</Text>
           <Input
             name="height"
             control={control}
@@ -65,7 +65,7 @@ export default function Step() {
             error={errors.height?.message}
             keyboardType="numeric"
           />
-          <Text style={styles.label}>Sua idade atual:</Text>
+          <Text style={styles.label}>Sua idade:</Text>
           <Input
             name="age"
             control={control}
